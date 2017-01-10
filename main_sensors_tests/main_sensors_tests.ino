@@ -1,3 +1,12 @@
+/* This is a combination of sensor test sketches
+	Includes
+		Gesture senosor,
+		Distance,
+		Knock/vibration,
+
+
+*/
+
 ////////////////////////////////////////////////////////////////// GESTURE SENSOR ///////////////////////////////////////////////////////////////
 // Libraries for Gesture sensor. Best to use libraries from SparkFun. and Functions used from their examples
 
@@ -119,6 +128,9 @@ uint16_t get_gp2d12 (uint16_t value) {
 
 
 /******** end code ********/
+/////////////////////////////////////////// Knock sensor
+
+#define knock_pin A1 // It can also be digital pin, as a hard knock reaches the threshold
 
 
 
@@ -131,24 +143,24 @@ void setup() {
   // Initialize Serial port
  	Serial.begin(9600);
  	Serial.println();
-  Serial.println(F("--------------------------------"));
-  Serial.println(F("SparkFun APDS-9960 - GestureTest"));
-  Serial.println(F("--------------------------------"));
-  // Initialize interrupt service routine
-  attachInterrupt(0, interruptRoutine, FALLING);
-  // Initialize APDS-9960 (configure I2C and initial values)
-  if ( apds.init() ) {
-    Serial.println(F("APDS-9960 initialization complete"));
-  } else {
-    Serial.println(F("Something went wrong during APDS-9960 init!"));
-  }
-  
-  // Start running the APDS-9960 gesture sensor engine
-  if ( apds.enableGestureSensor(true) ) {
-    Serial.println(F("Gesture sensor is now running"));
-  } else {
-    Serial.println(F("Something went wrong during gesture sensor init!"));
-  }
+	Serial.println(F("--------------------------------"));
+	Serial.println(F("SparkFun APDS-9960 - GestureTest"));
+	Serial.println(F("--------------------------------"));
+	// Initialize interrupt service routine
+	attachInterrupt(0, interruptRoutine, FALLING);
+	// Initialize APDS-9960 (configure I2C and initial values)
+	if ( apds.init() ) {
+	  Serial.println(F("APDS-9960 initialization complete"));
+	} else {
+	  Serial.println(F("Something went wrong during APDS-9960 init!"));
+	}
+	  
+	// Start running the APDS-9960 gesture sensor engine
+	if ( apds.enableGestureSensor(true) ) {
+	  Serial.println(F("Gesture sensor is now running"));
+	} else {
+	  Serial.println(F("Something went wrong during gesture sensor init!"));
+	}
   ////////////////////////////////////////// END gesture
 }
 
@@ -157,7 +169,7 @@ void loop() {
 
 	uint16_t value = analogRead (distance_pin);
 	uint16_t range = get_gp2d12 (value);
-	Serial.println (value);
+	//Serial.println (value);
 	Serial.print (range);
 	Serial.println (" mm");
 	Serial.println ();
