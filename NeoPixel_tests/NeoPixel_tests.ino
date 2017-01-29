@@ -8,8 +8,8 @@
 
 // Which pin on the Arduino is connected to the NeoPixels?
 // On a Trinket or Gemma we suggest changing this to 1
-#define PIN            6
-#define pinA A0
+#define PIN   6
+#define pinA  A0
 
 
 // How many NeoPixels are attached to the Arduino?
@@ -38,6 +38,10 @@ void colorWipe(uint32_t c, uint8_t wait) {
   }
 }
 
+int sensorValue = 0;         // the sensor value
+int sensorMin = 1023;        // minimum sensor value
+int sensorMax = 0;           // maximum sensor value
+
 void setup() {
   pinMode(pinA, INPUT);
   // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
@@ -50,6 +54,19 @@ void setup() {
   for (int thisReading = 0; thisReading < numReadings; thisReading++) {
     readings[thisReading] = 0;
   }
+//  while (millis() < 5000) {
+//    sensorValue = analogRead(pinA);
+//
+//    // record the maximum sensor value
+//    if (sensorValue > sensorMax) {
+//      sensorMax = sensorValue;
+//    }
+//
+//    // record the minimum sensor value
+//    if (sensorValue < sensorMin) {
+//      sensorMin = sensorValue;
+//    }
+//  }
 }
 
 void loop() {
@@ -70,11 +87,11 @@ void loop() {
   // calculate the average:
   average = total / numReadings;
 
-  uint16_t value_4 = map(average, 40, 640, 0, pixels.numPixels());
-  uint16_t value_5 = map(average, 40, 640, 0, 255);
+  uint16_t value_4 = map(average, 80, 645, 0, pixels.numPixels());
+  uint16_t value_5 = map(average, 80, 645, 0, 255);
   for (uint16_t i=0; i<value_4; i++){
     
-    pixels.setPixelColor(i, 255, value_5,0);
+    pixels.setPixelColor(i, 127, 0,0);
   }  
   for (uint16_t i=value_4; i<pixels.numPixels(); i++){ 
   pixels.setPixelColor(i, 0,0,127);
