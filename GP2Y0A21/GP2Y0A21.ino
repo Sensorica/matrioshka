@@ -9,15 +9,15 @@
  *      Signal -- Analog 0 
  */
 
-#define pin A0
+#define pinA A0
 
 void setup () {
   Serial.begin (9600);
-  pinMode (pin, INPUT);
+  pinMode (pinA, INPUT);
 }
 
 void loop () {
-  uint16_t value = analogRead (pin);
+  uint16_t value = analogRead (pinA);
   uint16_t range = get_gp2d12 (value);
   Serial.println (value);
   Serial.print (range);
