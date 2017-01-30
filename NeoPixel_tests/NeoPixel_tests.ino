@@ -1,13 +1,12 @@
-// NeoPixel Ring simple sketch (c) 2013 Shae Erisson
-// released under the GPLv3 license to match the rest of the AdaFruit NeoPixel library
+
 
 #include <Adafruit_NeoPixel.h>
 #ifdef __AVR__
   #include <avr/power.h>
 #endif
 
-// Which pin on the Arduino is connected to the NeoPixels?
-// On a Trinket or Gemma we suggest changing this to 1
+// PIN 6 is connected to NeoPixel input
+// pinA is connected to analog 0
 #define PIN   6
 #define pinA  A0
 
@@ -20,8 +19,9 @@
 // example for more information on possible values.
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
-const int numReadings = 30;
 
+//For analog reading smoothing
+const int numReadings = 30;
 int readings[numReadings];      // the readings from the analog input
 int readIndex = 0;              // the index of the current reading
 int total = 0;                  // the running total
@@ -54,19 +54,7 @@ void setup() {
   for (int thisReading = 0; thisReading < numReadings; thisReading++) {
     readings[thisReading] = 0;
   }
-//  while (millis() < 5000) {
-//    sensorValue = analogRead(pinA);
-//
-//    // record the maximum sensor value
-//    if (sensorValue > sensorMax) {
-//      sensorMax = sensorValue;
-//    }
-//
-//    // record the minimum sensor value
-//    if (sensorValue < sensorMin) {
-//      sensorMin = sensorValue;
-//    }
-//  }
+
 }
 
 void loop() {
@@ -94,8 +82,8 @@ void loop() {
     pixels.setPixelColor(i, 127, 0,0);
   }  
   for (uint16_t i=value_4; i<pixels.numPixels(); i++){ 
-  pixels.setPixelColor(i, 0,0,127);
-}
+    pixels.setPixelColor(i, 0,0,127);
+  }
   pixels.show();
   
 
