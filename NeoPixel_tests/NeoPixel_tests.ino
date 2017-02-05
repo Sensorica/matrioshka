@@ -8,8 +8,8 @@
 // PIN 6 is connected to NeoPixel input
 // pinA is connected to analog 0
 #define PIN   13
-#define pinA  A0
-#define piezo_pin A1
+#define pinA  A1
+#define piezo_pin A0
 
 
 // How many NeoPixels are attached to the Arduino?
